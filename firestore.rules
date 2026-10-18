@@ -1,0 +1,32 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signed() { return request.auth != null; }
+    function me(uid)  { return signed() && request.auth.uid == uid; }
+
+    // dados pessoais de cada usuário: só o próprio dono lê e escreve
+    match /data/users/{uid}/{doc=**} {
+      allow read, write: if me(uid);
+    }
+    // turma do profissional: qualquer usuário logado encontra pelo código; só o dono altera
+    match /turmas/{proId} {
+      allow read: if signed();
+      allow write: if me(proId);
+    }
+    // resumo do aluno: o aluno escreve; só ele e o profissional da turma dele leem
+    match /alunos/{alunoId} {
+      allow read: if me(alunoId) || (signed() && resource.data.proId == request.auth.uid);
+      allow write: if me(alunoId);
+    }
+    // prescrições: o profissional escreve; ele e o aluno destinatário leem
+    match /presc/{proId}/para/{alunoId} {
+      allow read: if me(proId) || me(alunoId);
+      allow write: if me(proId);
+    }
+    // modelos por código: qualquer logado lê e publica; só o autor apaga ou altera
+    match /modelos/{code} {
+      allow read, create: if signed();
+      allow update, delete: if signed() && resource.data.ownerId == request.auth.uid;
+    }
+  }
+}
