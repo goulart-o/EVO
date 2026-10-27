@@ -104,7 +104,7 @@ const TEMPLATES = [
    T('rosca-direta',3,8,12,'1–2',60,'',true),
    T('rosca-martelo',2,10,12,'1',60)]},
  {id:'legs',nome:'Legs — Pernas',kind:'academia',foco:'Quadríceps, posteriores, glúteos, panturrilhas e abdômen',cor:'#3E9A57',ex:[
-   T('leg-press',3,8,12,'2–3',120,'No dia de Legs a TFM vem depois: não vá à falha.'),
+   T('leg-press',3,8,12,'2–3',120,'Não vá à falha: as pernas precisam recuperar para o CrossFit.'),
    T('stiff',3,8,10,'2–3',120),
    T('bulgaro',2,10,12,'2–3',90,'Repetições para cada perna.'),
    T('extensora',3,12,15,'1',60),
@@ -116,21 +116,16 @@ const TEMPLATES = [
 
 // Atividades com METs (Compêndio de Atividades Físicas, Ainsworth 2011)
 const ACTS = [
- {id:'musc',nome:'Musculação',met:5,min:60},
+ {id:'musc',nome:'Academia',met:5,min:60},
+ {id:'corrida',nome:'Corrida',met:8.3,min:40},
  {id:'cross',nome:'CrossFit',met:7,min:60},
- {id:'tfm',nome:'TFM / corrida 10 km/h',met:8,min:60},
- {id:'corrida',nome:'Corrida leve (8 km/h)',met:8.3,min:30},
- {id:'caminhada',nome:'Caminhada',met:3.5,min:40},
- {id:'bike',nome:'Bicicleta moderada',met:7,min:45},
- {id:'natacao',nome:'Natação moderada',met:6,min:45},
- {id:'funcional',nome:'Funcional / HIIT',met:8,min:40},
- {id:'marcha',nome:'Marcha com carga',met:7.5,min:90},
- {id:'mob',nome:'Mobilidade / alongamento',met:2.5,min:20}
+ {id:'natacao',nome:'Natação',met:6,min:45},
+ {id:'caminhada',nome:'Caminhada',met:3.5,min:40}
 ];
 
 const DAYTYPES = [
- {id:'A',nome:'Dia A — treino triplo',desc:'Academia + TFM + CrossFit',acts:['musc','tfm','cross'],adj:-17,pKg:2.3,gKg:0.9,cor:'#E04A3A'},
- {id:'B',nome:'Dia B — sem CrossFit',desc:'Academia + TFM',acts:['musc','tfm'],adj:-17,pKg:2.3,gKg:0.9,cor:'#1F7AE0'},
+ {id:'A',nome:'Dia A — treino duplo',desc:'Academia + CrossFit',acts:['musc','cross'],adj:-17,pKg:2.3,gKg:0.9,cor:'#E04A3A'},
+ {id:'B',nome:'Dia B — só academia',desc:'Academia',acts:['musc'],adj:-17,pKg:2.3,gKg:0.9,cor:'#1F7AE0'},
  {id:'C',nome:'Dia C — descanso',desc:'Fim de semana',acts:[],adj:-3,pKg:2.3,gKg:1.0,cor:'#3E9A57'}
 ];
 
@@ -140,11 +135,11 @@ const PRE = {hora:'05:00',nome:'Pré-treino (academia 05:30)',p:0,c:0,g:0,ops:[o
 const M = (hora,nome,p,c,g,ops)=>({hora,nome,p,c,g,ops});
 const MEALS = {
  A:[ PRE,
-  M('06:40','Café da manhã — pós-academia / pré-TFM',35,90,10,[
+  M('06:40','Café da manhã — pós-academia',35,90,10,[
    o('Pão + ovos + banana','Café preto sem açúcar;Pão francês — 2 pães (100 g);1 banana (100 g);Mel — 10 g;1 ovo;5 claras',34,95,8,590),
    o('Tapioca + ovos + whey','Café preto sem açúcar;Tapioca (goma) — 90 g;1 banana (100 g);2 ovos;Whey protein — 1 scoop (30 g)',38,84,11,581),
    o('Mingau de aveia com whey','Leite desnatado — 200 ml;Aveia em flocos — 90 g;½ banana (50 g);Mel — 10 g;Whey protein — ½ scoop (15 g)',32,93,9,564)]),
-  M('09:45','Refeição pós-TFM',40,100,10,[
+  M('09:45','Lanche da manhã',40,100,10,[
    o('Batata-doce + frango','Legumes e salada — 100 g;Batata-doce cozida — 350 g;Peito de frango grelhado — 110 g;1 banana (100 g);Azeite — 5 g',40,94,8,612),
    o('Pão + ovos + whey + fruta','Pão francês — 2 pães (100 g);1 ovo;Whey protein — 1 scoop (30 g);1 banana (100 g);Mel — 15 g',40,101,9,636),
    o('Cuscuz + ovos + mamão','Cuscuz de milho — 250 g;2 ovos;6 claras;Mamão — 320 g',41,99,12,656)]),
@@ -161,11 +156,11 @@ const MEALS = {
    o('Batata + arroz + tilápia','Legumes e salada — 200 g;Batata inglesa cozida — 330 g;Arroz branco cozido — 220 g;Tilápia grelhada — 130 g;Azeite — 15 g',46,109,19,802),
    o('Mandioca + patinho + salada','Legumes e salada — 200 g;Mandioca cozida — 340 g;Patinho grelhado — 110 g;Azeite — 10 g',45,110,19,804)])],
  B:[ PRE,
-  M('06:40','Café da manhã — pós-academia / pré-TFM',35,80,10,[
+  M('06:40','Café da manhã — pós-academia',35,80,10,[
    o('Pão + ovos + banana','Café preto sem açúcar;Pão francês — 1½ pão (75 g);1 banana (100 g);Mel — 10 g;2 ovos;5 claras',38,81,12,587),
    o('Tapioca + ovos + whey','Café preto sem açúcar;Tapioca (goma) — 80 g;1 banana (100 g);2 ovos;Whey protein — 1 scoop (30 g)',38,78,11,557),
    o('Mingau de aveia com whey','Leite desnatado — 200 ml;Aveia em flocos — 90 g;½ banana (50 g);Mel — 5 g;Whey — ½ scoop (15 g)',32,89,9,549)]),
-  M('09:45','Refeição pós-TFM',40,90,10,[
+  M('09:45','Lanche da manhã',40,90,10,[
    o('Batata-doce + frango','Legumes e salada — 100 g;Batata-doce cozida — 310 g;Peito de frango — 110 g;1 banana (100 g);Azeite — 5 g',40,87,8,581),
    o('Pão + ovos + whey + fruta','Pão francês — 2 pães (100 g);1 ovo;Whey — 1 scoop (30 g);1 banana (100 g);Mel — 15 g',40,101,9,636),
    o('Cuscuz + ovos + mamão','Cuscuz de milho — 240 g;2 ovos;6 claras;Mamão — 270 g',41,91,12,625)]),
@@ -202,12 +197,6 @@ const MEALS = {
    o('Cottage + morangos','Queijo cottage — 140 g;Morango — 20 g',16,6,6,143),
    o('Ovos mexidos','1 ovo;4 claras',21,1,5,140),
    o('Iogurte com whey','Iogurte natural desnatado — 170 g;Whey — ½ scoop (15 g)',19,12,1,131)])]
-};
-
-const SUBS = {
- carbo:{t:'Carboidrato — 25 g',l:[['Arroz branco cozido','90 g'],['Batata-doce cozida','135 g'],['Mandioca cozida','85 g'],['Batata inglesa cozida','210 g'],['Macarrão cozido','100 g'],['Cuscuz de milho','100 g'],['Pão francês','45 g (≈ 0,9 pão)'],['Tapioca (goma)','40 g'],['Aveia em flocos','40 g'],['Banana','95 g (≈ 1 banana)'],['Feijão carioca cozido','185 g']]},
- prot:{t:'Proteína — 25 g',l:[['Peito de frango grelhado','80 g'],['Patinho grelhado','70 g'],['Tilápia grelhada','95 g'],['Atum em água (drenado)','95 g'],['Ovo inteiro','200 g (≈ 4 ovos)'],['Clara de ovo','230 g (≈ 7 claras)'],['Whey protein','30 g (≈ 1 scoop)'],['Queijo cottage','225 g']]},
- gord:{t:'Gordura — 10 g',l:[['Azeite de oliva','10 g (≈ 1 col. sopa)'],['Abacate','119 g'],['Pasta de amendoim','20 g (≈ 1 col. sopa cheia)'],['Castanha-do-pará','16 g (≈ 3 unidades)']]}
 };
 
 const SUPLEMENTOS = [
@@ -304,81 +293,9 @@ const SINAIS_OVERTRAINING = [
 
 
 // Frases dos mascotes do controle de peso. {guerreiro} vira "guerreiro" ou "guerreira" conforme o perfil.
-const FRASES = {
- perdaBoa:{
-  sutil:{t:['PARABÉNS!','CONTINUE ASSIM!','VOCÊ É DEMAIS!','MANDOU BEM!'],f:[
-   'Cada passo do seu processo é motivo de orgulho. Parabéns pelo seu empenho!',
-   'O resultado de cuidar de si é ver sua saúde e energia mudando a cada dia.',
-   'Não é só sobre números na balança, é sobre como você está se sentindo leve e forte.',
-   'Seu foco e dedicação estão dando frutos lindos. Continue no seu tempo!',
-   'Que incrível ver o resultado de todo o carinho e cuidado que você tem dedicado ao seu corpo.',
-   'Você está construindo uma versão mais saudável e disposta de si. Orgulhe-se!',
-   'Cada meta alcançada mostra o quanto sua determinação é gigante.',
-   'Que alegria ver você se descobrindo mais leve e confiante a cada etapa.',
-   'A constância é o verdadeiro segredo, e você está dando um show nisso.',
-   'Lembre-se sempre de celebrar as pequenas e grandes vitórias da sua jornada.']},
-  agressivo:{t:['CARALHO, QUE ISSO!','MONSTRO!','PORRA, MANDOU BEM!','TÁ VOANDO!'],f:[
-   'Finalmente criou vergonha nessa cara e parou de comer que nem um arrombado, parabéns!',
-   'Puta que pariu, sumiu metade de você! Agora vê se não volta a virar uma paçoca.',
-   'Cancelou a assinatura do rodízio, caralho? Tá fininho, parabéns pela disciplina!',
-   'Caralho, que transformação! Parou de ingerir gordura até pelo ar, porra!',
-   'Pelo menos a porra da força de vontade serviu pra alguma coisa além de dar desculpa.',
-   'Viu como não morrer de infarto antes dos 40 é bom? Continua nessa porra!',
-   'Tomou vergonha e fechou essa boca de caçapa, caralho! Mandou bem demais.',
-   'Caralho, a gordura foi embora e a dignidade voltou. Não estraga essa merda agora!',
-   'Finalmente a gravidade parou de sofrer tanto com você. Boa, caralho!',
-   'Parou de comer até o reboco da parede, né, desgraçado? Tá bonitão agora!']}},
- ganhoRuim:{
-  sutil:{t:['NÃO DESISTA!','VOCÊ É FORTE!','VAMOS LÁ!','{GUERREIRO}!'],f:[
-   'Seu corpo é a sua casa e oscilações fazem parte do ciclo da vida. Seja gentil consigo.',
-   'O seu valor nunca será medido por números em uma balança ou pelo tamanho da sua roupa.',
-   'O peso muda, mas a sua essência, sua força e sua beleza continuam intactas.',
-   'Respire fundo: recomeçar e recalibrar a rotina faz parte da jornada de qualquer pessoa.',
-   'Cuide de você por amor ao seu corpo, não por punição. Você merece carinho agora.',
-   'Não deixe uma fase definir quem você é. O equilíbrio se reconstrói um dia de cada vez.',
-   'Acolha seu momento presente; com paciência e amor-próprio você chega onde quiser.',
-   'O importante é como você se sente por dentro. Foque no seu bem-estar e na sua paz.',
-   'Corpos mudam e isso é normal. O essencial é continuar cuidando da sua saúde mental e física.',
-   'Tenha paciência com o seu tempo; respeitar o próprio ritmo é o primeiro passo.',
-   'Não desista. Vamos lá, você é {um guerreiro}!']},
-  agressivo:{t:['LEVANTA, PORRA!','BORA, CARALHO!','SEM DESCULPA!','REAGE, {GUERREIRO}!'],f:[
-   'Porra, a balança subiu. E daí? Levanta essa cabeça e bora pro treino, caralho!',
-   'Caiu? Levanta, porra! {Guerreiro} de verdade não fica no chão chorando.',
-   'Um número ruim não apaga o que você já construiu. Volta pro jogo, caralho!',
-   'Ligou o foda-se essa semana? Desliga agora e volta pra disciplina, porra!',
-   'Chega de desculpa, caralho. Amanhã é dieta no prato e treino na ficha.',
-   'Você é mais forte que essa porra de balança. Mostra isso semana que vem!',
-   'Escorregou? Normal. Ficar parado é que é inaceitável, caralho!',
-   'Puta que pariu, bora reagir! Água, proteína, treino e sono. Sem choro.',
-   'Ninguém vai fazer por você, porra. Fecha a ficha de hoje e segue o plano.',
-   '{Guerreiro} não desiste na primeira subida. Bora, caralho!']}},
- ganhoBom:{
-  sutil:{t:['PARABÉNS!','CRESCENDO!','VOCÊ É DEMAIS!'],f:[
-   'Massa chegando! Seu esforço na mesa e no treino está aparecendo.',
-   'Crescendo do jeito certo. Continue assim!',
-   'Cada quilo é um tijolo na sua construção. Orgulhe-se!',
-   'A constância está dando resultado. Siga firme no plano.']},
-  agressivo:{t:['MONSTRO!','CARALHO, CRESCEU!','PORRA, É ISSO!'],f:[
-   'Caralho, tá crescendo! Continua enchendo esse prato, porra!',
-   'Monstro em construção, porra! Segue o plano!',
-   'Puta que pariu, que evolução! Bora comer e treinar pesado.']}},
- perdaRuim:{
-  sutil:{t:['VAMOS LÁ!','VOCÊ É FORTE!'],f:[
-   'Tudo bem oscilar. Capriche nas refeições desta semana.',
-   'Seu corpo precisa de energia para crescer. Você consegue!',
-   'Uma semana não define o processo. Bora bater as calorias.']},
-  agressivo:{t:['COME, PORRA!','BORA, CARALHO!'],f:[
-   'Perdeu peso no bulking, caralho? Bora bater essas calorias!',
-   'Porra, tá comendo igual passarinho? Enche esse prato!']}},
- estavel:{
-  sutil:{t:['FIRME!','CONSTÂNCIA!'],f:[
-   'Peso estável. Constância também é vitória!',
-   'Manter também é progresso. Siga firme no plano.',
-   'Olhe também a cintura e as cargas: elas contam a história completa.']},
-  agressivo:{t:['E AÍ, PORRA?','BORA ACELERAR!'],f:[
-   'Nem subiu nem desceu. Bora dar aquele gás, caralho!',
-   'Parado, porra? Hora de apertar o passo!']}}
-};
 
-return {FRASES,G,LIB,TEMPLATES,ACTS,DAYTYPES,MEALS,SUBS,SUPLEMENTOS,RM_TABLE,VOLUME_NIVEL,PERIODS,BENCH,SINAIS_OVERTRAINING};
+
+/* Plano pronto: TFM + CrossFit + Academia — 8 tipos de dia com cardápio base (85 kg, recomposição) */
+const PRESET_MILITAR = {"nome": "TFM + CrossFit + Academia (8 tipos de dia)", "acts": [{"id": "tfm", "nome": "TFM", "met": 7, "min": 90}], "dayTypes": [{"id": "R", "nome": "Descanso", "desc": "Sem treino", "acts": [], "adj": -15, "pKg": 2.0, "gKg": 1.0, "cor": "#6B6B6B"}, {"id": "M", "nome": "Só academia", "desc": "Academia 05:30", "acts": ["musc"], "adj": -12, "pKg": 2.4, "gKg": 0.9, "cor": "#C9A96B"}, {"id": "T", "nome": "Só TFM", "desc": "TFM 07:30", "acts": ["tfm"], "adj": -12, "pKg": 2.2, "gKg": 0.9, "cor": "#3E9A57"}, {"id": "X", "nome": "Só CrossFit", "desc": "CrossFit à noite", "acts": ["cross"], "adj": -12, "pKg": 2.1, "gKg": 0.9, "cor": "#E5533F"}, {"id": "MT", "nome": "Academia + TFM", "desc": "Academia 05:30 + TFM 07:30", "acts": ["musc", "tfm"], "adj": -12, "pKg": 2.5, "gKg": 0.9, "cor": "#1F7AE0"}, {"id": "MX", "nome": "Academia + CrossFit", "desc": "Academia 05:30 + CrossFit à noite", "acts": ["musc", "cross"], "adj": -12, "pKg": 2.5, "gKg": 0.9, "cor": "#F0B323"}, {"id": "TX", "nome": "TFM + CrossFit", "desc": "TFM 07:30 + CrossFit à noite", "acts": ["tfm", "cross"], "adj": -12, "pKg": 2.3, "gKg": 0.9, "cor": "#7A5AF5"}, {"id": "MTX", "nome": "Academia + TFM + CrossFit", "desc": "Academia 05:30 + TFM 07:30 + CrossFit à noite", "acts": ["musc", "tfm", "cross"], "adj": -12, "pKg": 2.6, "gKg": 0.9, "cor": "#E9D3A1"}], "meals": {"R": [{"hora": "07:00", "nome": "Café da manhã", "p": 18, "c": 42, "g": 11, "ops": [{"nome": "Opção base", "itens": ["Pão francês — 1 un. (50 g)", "Ovos (cozidos ou mexidos sem óleo) — 2 un.", "Banana prata — 1 un. (≈45 g)", "Café sem açúcar à vontade"], "p": 18, "c": 42, "g": 11, "kcal": 340}]}, {"hora": "10:00", "nome": "Lanche da manhã", "p": 11, "c": 42, "g": 3, "ops": [{"nome": "Opção base", "itens": ["Iogurte natural desnatado — 170 g", "Aveia em flocos — 25 g", "Mamão papaia — 150 g"], "p": 11, "c": 42, "g": 3, "kcal": 228}]}, {"hora": "11:30", "nome": "Almoço", "p": 49, "c": 41, "g": 19, "ops": [{"nome": "Opção base", "itens": ["Arroz branco cozido — 95 g", "Feijão carioca cozido — 85 g", "Peito de frango grelhado — 130 g", "Alface — 40 g", "Tomate — 80 g", "Azeite — 15 g (≈2 colher de sopa)"], "p": 49, "c": 41, "g": 19, "kcal": 542}]}, {"hora": "15:30", "nome": "Lanche da tarde", "p": 33, "c": 23, "g": 18, "ops": [{"nome": "Opção base", "itens": ["Batata doce cozida — 95 g", "Peito de frango cozido / desfiado — 80 g", "Pasta de amendoim integral — 30 g"], "p": 33, "c": 23, "g": 18, "kcal": 380}]}, {"hora": "19:30", "nome": "Jantar", "p": 51, "c": 34, "g": 25, "ops": [{"nome": "Opção base", "itens": ["Arroz branco cozido — 95 g", "Patinho grelhado — 130 g", "Brócolis cozido — 80 g", "Cenoura cozida — 60 g", "Azeite — 15 g (≈2 colher de sopa)"], "p": 51, "c": 34, "g": 25, "kcal": 577}]}, {"hora": "22:30", "nome": "Ceia", "p": 9, "c": 22, "g": 3, "ops": [{"nome": "Opção base", "itens": ["Queijo cottage — 80 g", "Maçã — 130 g"], "p": 9, "c": 22, "g": 3, "kcal": 151}]}], "M": [{"hora": "05:00", "nome": "Pré-treino (academia 05:30)", "p": 0, "c": 0, "g": 0, "ops": [{"nome": "Café preto", "itens": ["Café preto sem açúcar", "Opcional: creatina 5 g"], "p": 0, "c": 0, "g": 0, "kcal": 0}]}, {"hora": "06:40", "nome": "Café da manhã — pós-academia", "p": 46, "c": 80, "g": 14, "ops": [{"nome": "Opção base", "itens": ["Pão francês — 2 un. (100 g)", "Ovos (cozidos ou mexidos sem óleo) — 2 un.", "Banana prata — 1 un. (≈70 g)", "Café sem açúcar à vontade", "Whey protein — 1 scoop (30 g)"], "p": 46, "c": 80, "g": 14, "kcal": 635}]}, {"hora": "10:00", "nome": "Lanche da manhã", "p": 13, "c": 52, "g": 4, "ops": [{"nome": "Opção base", "itens": ["Iogurte natural desnatado — 170 g", "Aveia em flocos — 40 g", "Mamão papaia — 150 g"], "p": 13, "c": 52, "g": 4, "kcal": 287}]}, {"hora": "11:30", "nome": "Almoço", "p": 51, "c": 58, "g": 16, "ops": [{"nome": "Opção base", "itens": ["Arroz branco cozido — 155 g", "Feijão carioca cozido — 85 g", "Peito de frango grelhado — 130 g", "Alface — 40 g", "Tomate — 80 g", "Azeite — 12 g (≈2 colher de sopa)"], "p": 51, "c": 58, "g": 16, "kcal": 592}]}, {"hora": "15:30", "nome": "Lanche da tarde", "p": 32, "c": 34, "g": 15, "ops": [{"nome": "Opção base", "itens": ["Batata doce cozida — 155 g", "Peito de frango cozido / desfiado — 80 g", "Pasta de amendoim integral — 25 g"], "p": 32, "c": 34, "g": 15, "kcal": 397}]}, {"hora": "19:30", "nome": "Jantar", "p": 53, "c": 51, "g": 22, "ops": [{"nome": "Opção base", "itens": ["Arroz branco cozido — 155 g", "Patinho grelhado — 130 g", "Brócolis cozido — 80 g", "Cenoura cozida — 60 g", "Azeite — 12 g (≈2 colher de sopa)"], "p": 53, "c": 51, "g": 22, "kcal": 627}]}, {"hora": "22:30", "nome": "Ceia", "p": 9, "c": 22, "g": 3, "ops": [{"nome": "Opção base", "itens": ["Queijo cottage — 80 g", "Maçã — 130 g"], "p": 9, "c": 22, "g": 3, "kcal": 151}]}], "T": [{"hora": "07:00", "nome": "Café da manhã", "p": 27, "c": 114, "g": 14, "ops": [{"nome": "Opção base", "itens": ["Pão francês — 3 un. (150 g)", "Ovos (cozidos ou mexidos sem óleo) — 2 un.", "Banana prata — 1 un. (≈100 g)", "Café sem açúcar à vontade"], "p": 27, "c": 114, "g": 14, "kcal": 694}]}, {"hora": "09:45", "nome": "Lanche pós-TFM", "p": 15, "c": 87, "g": 5, "ops": [{"nome": "Opção base", "itens": ["Iogurte natural desnatado — 170 g", "Aveia em flocos — 55 g", "Mamão papaia — 150 g", "Mel — 30 g"], "p": 15, "c": 87, "g": 5, "kcal": 439}]}, {"hora": "11:30", "nome": "Almoço", "p": 52, "c": 74, "g": 16, "ops": [{"nome": "Opção base", "itens": ["Arroz branco cozido — 210 g", "Feijão carioca cozido — 85 g", "Peito de frango grelhado — 130 g", "Alface — 40 g", "Tomate — 80 g", "Azeite — 12 g (≈2 colher de sopa)"], "p": 52, "c": 74, "g": 16, "kcal": 663}]}, {"hora": "15:30", "nome": "Lanche da tarde", "p": 33, "c": 44, "g": 15, "ops": [{"nome": "Opção base", "itens": ["Batata doce cozida — 210 g", "Peito de frango cozido / desfiado — 80 g", "Pasta de amendoim integral — 25 g"], "p": 33, "c": 44, "g": 15, "kcal": 439}]}, {"hora": "19:30", "nome": "Jantar", "p": 54, "c": 67, "g": 22, "ops": [{"nome": "Opção base", "itens": ["Arroz branco cozido — 210 g", "Patinho grelhado — 130 g", "Brócolis cozido — 80 g", "Cenoura cozida — 60 g", "Azeite — 12 g (≈2 colher de sopa)"], "p": 54, "c": 67, "g": 22, "kcal": 698}]}, {"hora": "22:30", "nome": "Ceia", "p": 9, "c": 22, "g": 3, "ops": [{"nome": "Opção base", "itens": ["Queijo cottage — 80 g", "Maçã — 130 g"], "p": 9, "c": 22, "g": 3, "kcal": 151}]}], "X": [{"hora": "07:00", "nome": "Café da manhã", "p": 22, "c": 81, "g": 13, "ops": [{"nome": "Opção base", "itens": ["Pão francês — 2 un. (100 g)", "Ovos (cozidos ou mexidos sem óleo) — 2 un.", "Banana prata — 1 un. (≈85 g)", "Café sem açúcar à vontade"], "p": 22, "c": 81, "g": 13, "kcal": 529}]}, {"hora": "10:00", "nome": "Lanche da manhã", "p": 14, "c": 59, "g": 5, "ops": [{"nome": "Opção base", "itens": ["Iogurte natural desnatado — 170 g", "Aveia em flocos — 50 g", "Mamão papaia — 150 g"], "p": 14, "c": 59, "g": 5, "kcal": 327}]}, {"hora": "11:30", "nome": "Almoço", "p": 52, "c": 67, "g": 19, "ops": [{"nome": "Opção base", "itens": ["Arroz branco cozido — 185 g", "Feijão carioca cozido — 85 g", "Peito de frango grelhado — 130 g", "Alface — 40 g", "Tomate — 80 g", "Azeite — 15 g (≈2 colher de sopa)"], "p": 52, "c": 67, "g": 19, "kcal": 657}]}, {"hora": "15:30", "nome": "Lanche da tarde — pré-CrossFit", "p": 27, "c": 56, "g": 3, "ops": [{"nome": "Opção base", "itens": ["Batata doce cozida — 185 g", "Peito de frango cozido / desfiado — 80 g", "Banana prata — 1 un. (≈85 g)"], "p": 27, "c": 56, "g": 3, "kcal": 356}]}, {"hora": "20:45", "nome": "Jantar — pós-CrossFit", "p": 53, "c": 60, "g": 25, "ops": [{"nome": "Opção base", "itens": ["Arroz branco cozido — 185 g", "Patinho grelhado — 130 g", "Brócolis cozido — 80 g", "Cenoura cozida — 60 g", "Azeite — 15 g (≈2 colher de sopa)"], "p": 53, "c": 60, "g": 25, "kcal": 692}]}, {"hora": "22:30", "nome": "Ceia", "p": 9, "c": 22, "g": 3, "ops": [{"nome": "Opção base", "itens": ["Queijo cottage — 80 g", "Maçã — 130 g"], "p": 9, "c": 22, "g": 3, "kcal": 151}]}], "MT": [{"hora": "05:00", "nome": "Pré-treino (academia 05:30)", "p": 0, "c": 0, "g": 0, "ops": [{"nome": "Café preto", "itens": ["Café preto sem açúcar", "Opcional: creatina 5 g"], "p": 0, "c": 0, "g": 0, "kcal": 0}]}, {"hora": "06:40", "nome": "Café da manhã — pós-academia", "p": 50, "c": 120, "g": 16, "ops": [{"nome": "Opção base", "itens": ["Pão francês — 3 un. (150 g)", "Ovos (cozidos ou mexidos sem óleo) — 2 un.", "Banana prata — 2 un. (≈110 g)", "Café sem açúcar à vontade", "Whey protein — 1 scoop (30 g)"], "p": 50, "c": 120, "g": 16, "kcal": 824}]}, {"hora": "09:45", "nome": "Lanche pós-TFM", "p": 16, "c": 94, "g": 6, "ops": [{"nome": "Opção base", "itens": ["Iogurte natural desnatado — 170 g", "Aveia em flocos — 65 g", "Mamão papaia — 150 g", "Mel — 30 g"], "p": 16, "c": 94, "g": 6, "kcal": 478}]}, {"hora": "11:30", "nome": "Almoço", "p": 53, "c": 82, "g": 15, "ops": [{"nome": "Opção base", "itens": ["Arroz branco cozido — 240 g", "Feijão carioca cozido — 85 g", "Peito de frango grelhado — 130 g", "Alface — 40 g", "Tomate — 80 g", "Azeite — 11 g (≈1 colher de sopa)"], "p": 53, "c": 82, "g": 15, "kcal": 692}]}, {"hora": "15:30", "nome": "Lanche da tarde", "p": 32, "c": 48, "g": 13, "ops": [{"nome": "Opção base", "itens": ["Batata doce cozida — 240 g", "Peito de frango cozido / desfiado — 80 g", "Pasta de amendoim integral — 20 g"], "p": 32, "c": 48, "g": 13, "kcal": 433}]}, {"hora": "19:30", "nome": "Jantar", "p": 55, "c": 75, "g": 21, "ops": [{"nome": "Opção base", "itens": ["Arroz branco cozido — 240 g", "Patinho grelhado — 130 g", "Brócolis cozido — 80 g", "Cenoura cozida — 60 g", "Azeite — 11 g (≈1 colher de sopa)"], "p": 55, "c": 75, "g": 21, "kcal": 727}]}, {"hora": "22:30", "nome": "Ceia", "p": 9, "c": 22, "g": 3, "ops": [{"nome": "Opção base", "itens": ["Queijo cottage — 80 g", "Maçã — 130 g"], "p": 9, "c": 22, "g": 3, "kcal": 151}]}], "MX": [{"hora": "05:00", "nome": "Pré-treino (academia 05:30)", "p": 0, "c": 0, "g": 0, "ops": [{"nome": "Café preto", "itens": ["Café preto sem açúcar", "Opcional: creatina 5 g"], "p": 0, "c": 0, "g": 0, "kcal": 0}]}, {"hora": "06:40", "nome": "Café da manhã — pós-academia", "p": 50, "c": 117, "g": 16, "ops": [{"nome": "Opção base", "itens": ["Pão francês — 3 un. (150 g)", "Ovos (cozidos ou mexidos sem óleo) — 2 un.", "Banana prata — 1 un. (≈100 g)", "Café sem açúcar à vontade", "Whey protein — 1 scoop (30 g)"], "p": 50, "c": 117, "g": 16, "kcal": 814}]}, {"hora": "10:00", "nome": "Lanche da manhã", "p": 15, "c": 62, "g": 5, "ops": [{"nome": "Opção base", "itens": ["Iogurte natural desnatado — 170 g", "Aveia em flocos — 55 g", "Mamão papaia — 150 g"], "p": 15, "c": 62, "g": 5, "kcal": 346}]}, {"hora": "11:30", "nome": "Almoço", "p": 52, "c": 75, "g": 19, "ops": [{"nome": "Opção base", "itens": ["Arroz branco cozido — 215 g", "Feijão carioca cozido — 85 g", "Peito de frango grelhado — 130 g", "Alface — 40 g", "Tomate — 80 g", "Azeite — 15 g (≈2 colher de sopa)"], "p": 52, "c": 75, "g": 19, "kcal": 696}]}, {"hora": "15:30", "nome": "Lanche da tarde — pré-CrossFit", "p": 28, "c": 66, "g": 3, "ops": [{"nome": "Opção base", "itens": ["Batata doce cozida — 215 g", "Peito de frango cozido / desfiado — 80 g", "Banana prata — 1 un. (≈100 g)"], "p": 28, "c": 66, "g": 3, "kcal": 394}]}, {"hora": "20:45", "nome": "Jantar — pós-CrossFit", "p": 54, "c": 68, "g": 25, "ops": [{"nome": "Opção base", "itens": ["Arroz branco cozido — 215 g", "Patinho grelhado — 130 g", "Brócolis cozido — 80 g", "Cenoura cozida — 60 g", "Azeite — 15 g (≈2 colher de sopa)"], "p": 54, "c": 68, "g": 25, "kcal": 730}]}, {"hora": "22:30", "nome": "Ceia", "p": 9, "c": 22, "g": 3, "ops": [{"nome": "Opção base", "itens": ["Queijo cottage — 80 g", "Maçã — 130 g"], "p": 9, "c": 22, "g": 3, "kcal": 151}]}], "TX": [{"hora": "07:00", "nome": "Café da manhã", "p": 31, "c": 150, "g": 16, "ops": [{"nome": "Opção base", "itens": ["Pão francês — 4 un. (200 g)", "Ovos (cozidos ou mexidos sem óleo) — 2 un.", "Banana prata — 2 un. (≈125 g)", "Café sem açúcar à vontade"], "p": 31, "c": 150, "g": 16, "kcal": 868}]}, {"hora": "09:45", "nome": "Lanche pós-TFM", "p": 17, "c": 101, "g": 7, "ops": [{"nome": "Opção base", "itens": ["Iogurte natural desnatado — 170 g", "Aveia em flocos — 70 g", "Mamão papaia — 150 g", "Mel — 35 g"], "p": 17, "c": 101, "g": 7, "kcal": 514}]}, {"hora": "11:30", "nome": "Almoço", "p": 54, "c": 89, "g": 19, "ops": [{"nome": "Opção base", "itens": ["Arroz branco cozido — 265 g", "Feijão carioca cozido — 85 g", "Peito de frango grelhado — 130 g", "Alface — 40 g", "Tomate — 80 g", "Azeite — 15 g (≈2 colher de sopa)"], "p": 54, "c": 89, "g": 19, "kcal": 760}]}, {"hora": "15:30", "nome": "Lanche da tarde — pré-CrossFit", "p": 28, "c": 81, "g": 3, "ops": [{"nome": "Opção base", "itens": ["Batata doce cozida — 265 g", "Peito de frango cozido / desfiado — 80 g", "Banana prata — 2 un. (≈125 g)"], "p": 28, "c": 81, "g": 3, "kcal": 457}]}, {"hora": "20:45", "nome": "Jantar — pós-CrossFit", "p": 55, "c": 82, "g": 26, "ops": [{"nome": "Opção base", "itens": ["Arroz branco cozido — 265 g", "Patinho grelhado — 130 g", "Brócolis cozido — 80 g", "Cenoura cozida — 60 g", "Azeite — 15 g (≈2 colher de sopa)"], "p": 55, "c": 82, "g": 26, "kcal": 794}]}, {"hora": "22:30", "nome": "Ceia", "p": 9, "c": 22, "g": 3, "ops": [{"nome": "Opção base", "itens": ["Queijo cottage — 80 g", "Maçã — 130 g"], "p": 9, "c": 22, "g": 3, "kcal": 151}]}], "MTX": [{"hora": "05:00", "nome": "Pré-treino (academia 05:30)", "p": 0, "c": 0, "g": 0, "ops": [{"nome": "Café preto", "itens": ["Café preto sem açúcar", "Opcional: creatina 5 g"], "p": 0, "c": 0, "g": 0, "kcal": 0}]}, {"hora": "06:40", "nome": "Café da manhã — pós-academia", "p": 54, "c": 155, "g": 18, "ops": [{"nome": "Opção base", "itens": ["Pão francês — 4 un. (200 g)", "Ovos (cozidos ou mexidos sem óleo) — 2 un.", "Banana prata — 2 un. (≈135 g)", "Café sem açúcar à vontade", "Whey protein — 1 scoop (30 g)"], "p": 54, "c": 155, "g": 18, "kcal": 998}]}, {"hora": "09:45", "nome": "Lanche pós-TFM", "p": 18, "c": 112, "g": 7, "ops": [{"nome": "Opção base", "itens": ["Iogurte natural desnatado — 170 g", "Aveia em flocos — 80 g", "Mamão papaia — 150 g", "Mel — 40 g"], "p": 18, "c": 112, "g": 7, "kcal": 568}]}, {"hora": "11:30", "nome": "Almoço", "p": 54, "c": 96, "g": 19, "ops": [{"nome": "Opção base", "itens": ["Arroz branco cozido — 290 g", "Feijão carioca cozido — 85 g", "Peito de frango grelhado — 130 g", "Alface — 40 g", "Tomate — 80 g", "Azeite — 15 g (≈2 colher de sopa)"], "p": 54, "c": 96, "g": 19, "kcal": 792}]}, {"hora": "15:30", "nome": "Lanche da tarde — pré-CrossFit", "p": 29, "c": 88, "g": 3, "ops": [{"nome": "Opção base", "itens": ["Batata doce cozida — 290 g", "Peito de frango cozido / desfiado — 80 g", "Banana prata — 2 un. (≈135 g)"], "p": 29, "c": 88, "g": 3, "kcal": 486}]}, {"hora": "20:45", "nome": "Jantar — pós-CrossFit", "p": 56, "c": 89, "g": 26, "ops": [{"nome": "Opção base", "itens": ["Arroz branco cozido — 290 g", "Patinho grelhado — 130 g", "Brócolis cozido — 80 g", "Cenoura cozida — 60 g", "Azeite — 15 g (≈2 colher de sopa)"], "p": 56, "c": 89, "g": 26, "kcal": 826}]}, {"hora": "22:30", "nome": "Ceia", "p": 9, "c": 22, "g": 3, "ops": [{"nome": "Opção base", "itens": ["Queijo cottage — 80 g", "Maçã — 130 g"], "p": 9, "c": 22, "g": 3, "kcal": 151}]}]}, "weekPattern": {"1": [{"act": "musc", "hora": "05:30", "rot": true}, {"act": "tfm", "hora": "07:30"}, {"act": "cross", "hora": "19:30"}], "2": [{"act": "musc", "hora": "05:30", "rot": true}, {"act": "tfm", "hora": "07:30"}, {"act": "cross", "hora": "19:30"}], "3": [{"act": "musc", "hora": "05:30", "rot": true}, {"act": "tfm", "hora": "07:30"}, {"act": "cross", "hora": "19:30"}], "4": [{"act": "musc", "hora": "05:30", "rot": true}, {"act": "tfm", "hora": "07:30"}, {"act": "cross", "hora": "19:30"}], "5": [{"act": "musc", "hora": "05:30", "rot": true}, {"act": "tfm", "hora": "07:30"}], "6": [], "0": []}};
+return {PRESET_MILITAR,G,LIB,TEMPLATES,ACTS,DAYTYPES,MEALS,SUPLEMENTOS,RM_TABLE,VOLUME_NIVEL,PERIODS,BENCH,SINAIS_OVERTRAINING};
 })();

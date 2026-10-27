@@ -264,8 +264,8 @@ function animate(el,id,grupo){
   if(!A[id]||!el) return ()=>{};
   let raf, t0=performance.now(), stop=false;
   const g=el.querySelector('.exart-live'), label=el.parentElement&&el.parentElement.querySelector('.exart-phase');
-  const T=[1200,350,1600,450], tot=T.reduce((a,b)=>a+b,0);
-  const ease=x=>x<.5?2*x*x:1-Math.pow(-2*x+2,2)/2;
+  const T=[1400,300,1800,500], tot=T.reduce((a,b)=>a+b,0);
+  const ease=x=>.5-.5*Math.cos(Math.PI*x);
   const tick=now=>{
     if(stop||!el.isConnected) return;
     let t=(now-t0)%tot, k, ph;
